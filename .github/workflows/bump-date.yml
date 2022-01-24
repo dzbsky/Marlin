@@ -27,9 +27,17 @@ jobs:
       run: |
         # Inline Bump Script
         if [[ ! "$( git log -1 --pretty=%B )" =~ ^\[cron\] ]]; then
+<<<<<<< HEAD
           DIST=$( date +"%Y-%m-24" )
           eval "sed -E -i 's/(#define +STRING_DISTRIBUTION_DATE) .*$/\1 \"$DIST\"/g' Marlin/src/inc/Version.h" && \
           eval "sed -E -i 's/(#define +STRING_DISTRIBUTION_DATE) .*$/\1 \"$DIST\"/g' Marlin/Version.h" && \
+=======
+          DIST=$( date +"%Y-%m-%d" )
+          eval "sed -E -i 's/(#define +STRING_DISTRIBUTION_DATE) .*$/\1 \"$DIST\"/g' Marlin/src/inc/Version.h" && \
+          eval "sed -E -i 's/(#define +STRING_DISTRIBUTION_DATE) .*$/\1 \"$DIST\"/g' Marlin/Version.h" && \
+          git config user.name "${GITHUB_ACTOR}" && \
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com" && \
+>>>>>>> db4172b5fa05e818f42427001398db5f13d13024
           git add . && \
           git commit -m "[cron] Bump distribution date ($DIST)" && \
           git push
